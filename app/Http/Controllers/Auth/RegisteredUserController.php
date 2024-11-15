@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\Customer;
 use App\Models\Customers;
 use App\Models\User;
@@ -47,6 +48,7 @@ class RegisteredUserController extends Controller
         $user->assignRole('customer');
 
         Customer::create(['user_id'=> $user->id]);
+        Cart::create(['user_id'=> $user->id, 'total' => 0]);
 
         event(new Registered($user));
 

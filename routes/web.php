@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -22,11 +23,15 @@ Route::get('/dashboard', function () {
 Route::get('/products', [ProductController::class, 'index'])
 ->middleware(['auth', 'verified'])->name('product.index');
 
-Route::get('/products', [ProductController::class, 'index'])
-->middleware(['auth', 'verified'])->name('product.index');
+Route::get('/product/buy/{product_id}/{quantity}', [ProductController::class, 'buy'])
+->middleware(['auth', 'verified'])->name('product.buy');
 
-Route::get('/product/cart/{id}', [ProductController::class, 'index'])
-->middleware(['auth', 'verified'])->name('product.index');
+Route::get('/product/addtocart/{product_id}/{quantity}', [ProductController::class, 'addtocart'])
+->middleware(['auth', 'verified'])->name('product.add');
+
+Route::get('/cart/view', [CartController::class, 'index'])
+->middleware(['auth', 'verified'])->name('cart.index');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -10,7 +10,7 @@ export default function ProductSearch({ products }) {
     
     // Pagination state
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 1;  // Number of items per page
+    const itemsPerPage = 10;  // Number of items per page
 
     // Filtered products based on search and price
     const filteredProducts = products.filter((product) => {
@@ -120,7 +120,8 @@ export default function ProductSearch({ products }) {
                                                     <h3 className="text-lg font-semibold">{product.name}</h3>
                                                     <p className="text-gray-500">{product.description}</p>
                                                     <p className="text-blue-600 font-bold mt-2">${product.price}</p>
-                                                    <a className='' href="">Buy</a>
+                                                    <Link className='' method='get' href={'product/buy/'+ product.id + '/' + 1} >Buy</Link>
+                                                    <Link className='' method='get' href={'product/addtocart/'+ product.id + '/' + 1} >Add To Cart</Link>
                                                 </div>
                                             ))
                                         ) : (
